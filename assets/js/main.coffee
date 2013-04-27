@@ -6,3 +6,6 @@ $ ->
 
   $('#cal').on 'click', '.prev', ->
     cal.prevMonth()
+
+  $('#cal td').on 'click', ->
+    console.log 'event popup'

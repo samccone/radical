@@ -3,6 +3,8 @@
 normalize()
 base()
 
+custom_color = #fb5658
+
 body
   padding: 50px
 
@@ -27,15 +29,15 @@ body
       absolute: left 25px top 3px
 
     .month
-      gradient: #fa6e6e #ee4f51
-      color: #b02d2f
+      simple-gradient: custom_color
+      color: darken(custom_color, 48%)
       text-shadow: 0 1px 1px rgba(#fff,.4)
 
       th
         position: relative
         padding: 6px 0
         border-radius: 4px 4px 0 0
-        border: 1px solid #b82f30
+        border: 1px solid darken(custom_color, 40%)
 
     .days
 
@@ -68,3 +70,4 @@ body
         absolute: top 5px right 10px
         bold()
         color: #afacac
+        cursor: default
