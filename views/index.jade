@@ -6,6 +6,7 @@ block scripts
 block content
   #cal
   form.event(method="post", enctype="multipart/form-data", action="/events/create")
+    input(type="number", value=1, name="calendar_id")
 
     .header
       p New Event Title

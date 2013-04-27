@@ -7,13 +7,28 @@ exports.set = function(app, schema) {
 }
 
 function createEvent(req, res) {
-  console.log(Schema.Event);
-  console.log(req.body);
-  buildData = req.body;
-  buildData.duration = +req.body.from - +req.body.to
-  Schema.Event.create(req.body, function(err, d) {
-    res.json(d);
+  Schema.Calendar.findOne(req.body.calendar_id, function(err, cal) {
+    if (cal === null) {
+      createCalendar(function(err, cal) {
+        buildAndCreateEvent(cal, req.body, function(err, d) {
+          res.json(d);
+        });
+      });
+    } else {
+      buildAndCreateEvent(cal, req.body, function(err, d) {
+        res.json(d);
+      });
+    }
   });
+}
+
+function buildAndCreateEvent(cal, data, cb) {
+  data.duration = +data.from - +data.to;
+  cal.events.create(data, cb);
+}
+
+function createCalendar(cb) {
+  Schema.Calendar.create(cb);
 }
 
 /*
