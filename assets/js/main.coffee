@@ -1,1 +1,1 @@
-console.log 'coffeescript works'
+console.log 'hello world'
