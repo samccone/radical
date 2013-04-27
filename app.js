@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -8,9 +7,11 @@ var express = require('express'),
     http    = require('http'),
     roots   = require('roots-express'),
     assets  = require('connect-assets'),
-    path    = require('path');
+    path    = require('path'),
+    db      = require('./db/interface');
 
 require('coffee-script');
+
 
 var app = express();
 roots.add_compiler(assets);
@@ -33,8 +34,10 @@ app.configure('development', function(){
 
 routes.set(app);
 
-var server = http.createServer(app).listen(app.get('port'), function(){
-  console.log("Server listening on port " + app.get('port') + "\n Control + C to stop");
-});
+db.connect(function(err, Schema) {
+  var server = http.createServer(app).listen(app.get('port'), function(){
+    console.log("Server listening on port " + app.get('port') + "\n Control + C to stop");
+  });
 
-roots.watch(server);
+  roots.watch(server);
+});

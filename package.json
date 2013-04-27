@@ -11,6 +11,9 @@
     "stylus": "latest",
     "coffee-script": "latest",
     "roots-express": "latest",
-    "connect-assets": "latest"
+    "connect-assets": "latest",
+    "jugglingdb": "0.2.0-31",
+    "jugglingdb-mongodb": "0.0.4-2",
+    "colors": "latest"
   }
 }
