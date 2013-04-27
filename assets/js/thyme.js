@@ -91,6 +91,7 @@
           if (dayOfWeek === day) {
             var d = document.createElement("span");
             d.innerHTML = days.shift();
+            cell.dataset.stamp = moment("" + (this.currentDate.year()) + "-" + (this.currentDate.month() + 1) + "-"+d.innerHTML).toDate().getTime();
             cell.appendChild(d);
           }
           row.appendChild(cell);
