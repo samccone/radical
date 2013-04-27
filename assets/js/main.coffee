@@ -1,11 +1,24 @@
 $ ->
+
+  # 
+  # init calendar
+  # 
+
   cal = new Thyme $("#cal")[0]
+
+  #
+  # month pickers
+  # 
 
   $('#cal').on 'click', '.next', ->
     cal.nextMonth()
 
   $('#cal').on 'click', '.prev', ->
     cal.prevMonth()
+
+  # 
+  # event popup
+  # 
 
   $('#cal td').one 'click', ->
     $('.event').appendTo($('body'))
