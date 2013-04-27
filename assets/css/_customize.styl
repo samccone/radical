@@ -5,6 +5,7 @@
   z-index: 2
   transition: all .2s ease-out-back
 
+
   .header
     background: blue
     color: #fff
@@ -22,9 +23,9 @@
   .body
     height: 320px
     border: 1px solid #caccd6
-    padding: 10px
+    padding: 15px
 
-  ul
+  ul.colors
     reset-list()
     bold()
 
@@ -60,3 +61,29 @@
       margin-left: 10px
       margin-top: 7px
       font-size: .9em
+
+  .view-selector
+    group()
+    bold()
+    font-size: .8em
+    border-radius: 4px
+    border: 1px solid darken(@background, 40%)
+    background: #fcfcfc
+    color: #cbcbcd
+    text-align: center
+    margin: 20px 0
+    padding: 0
+
+    .list-view, .month-view
+      display: inline-block
+      width: 49%
+      padding: 5px;
+      -webkit-box-sizing: border-box
+
+    .active
+      background: #f9f9fa
+      color: #6b6b72
+      border: 1px solid darken(@background, 60%)
+
+  .dashed
+    border-top: 1px dashed #cbcbcd
