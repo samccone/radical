@@ -1,4 +1,16 @@
 extends layout
 
+block scripts
+  != js("in_app/creation")
+
 block content
   #cal
+  form(method="post", enctype="multipart/form-data", action="/events/create")
+    input(type="text", placeholder="from", name="from")
+    input(type="text", placeholder="to", name="to")
+    br/
+    input(type="text", placeholder="location", name="location")
+    br/
+    input(type="text", placeholder="info", name="info")
+    br/
+    input(type="submit") Create This Event

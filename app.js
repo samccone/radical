@@ -32,9 +32,9 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-routes.set(app);
-
 db.connect(function(err, Schema) {
+  routes.set(app, Schema);
+
   var server = http.createServer(app).listen(app.get('port'), function(){
     console.log("Server listening on port " + app.get('port') + "\n Control + C to stop");
   });
