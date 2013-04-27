@@ -34,6 +34,7 @@ function createEvent(req, res) {
 }
 
 function buildAndCreateEvent(cal, data, cb) {
+  data.date = new Date(parseInt(data.date))
   cal.events.create(data, cb);
 }
 

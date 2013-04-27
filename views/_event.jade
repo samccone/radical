@@ -1,5 +1,5 @@
 form.event(method="post", enctype="multipart/form-data", action="/events/create")
-  input.id(type="number", value=cal_id, name="calendar_id")
+  input.id(type="string", value=cal_id, name="calendar_id")
 
   .header
     p New Event Title
@@ -7,6 +7,7 @@ form.event(method="post", enctype="multipart/form-data", action="/events/create"
 
   .body
     .row
+      input(type="number", name="date", hidden)
       select.from(name="from")
         - for(var i = 0; i < 24; ++i)
           - if (i < 24)

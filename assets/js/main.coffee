@@ -1,14 +1,14 @@
 $ ->
 
-  # 
+  #
   # init calendar
-  # 
+  #
 
   cal = new Thyme $("#cal")[0]
 
   #
   # month pickers
-  # 
+  #
 
   $('#cal').on 'click', '.next', ->
     cal.nextMonth()
@@ -18,9 +18,9 @@ $ ->
     cal.prevMonth()
     render_events()
 
-  # 
+  #
   # event popup
-  # 
+  #
 
   $('#cal td').one 'click', ->
     $('.event').appendTo($('body'))
@@ -30,13 +30,14 @@ $ ->
     pos_left = pos.left - 170 + $(@).width()/2
     pos_top = pos.top + $(@).outerHeight()
     $('.event').css(left: pos_left, top: pos_top).show()
+    $('.event [name="date"]').val($(this).data('stamp'));
 
   $('.event').on 'click', '.close', ->
     $('.event').hide()
 
-  # 
+  #
   # event placement
-  # 
+  #
 
   data = {
     '2013': {
