@@ -32,7 +32,6 @@ function createEvent(req, res) {
 }
 
 function buildAndCreateEvent(cal, data, cb) {
-  data.duration = {form: data.from,  to: data.to};
   cal.events.create(data, cb);
 }
 

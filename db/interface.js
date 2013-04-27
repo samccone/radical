@@ -17,7 +17,8 @@ function getAndSetSchemas(cb) {
   var Event = db.define("Event", {
     location: String,
     info: String,
-    duration: Number,
+    from: String,
+    to: String,
     date: {type: Date, default: Date.now}
   });
 
