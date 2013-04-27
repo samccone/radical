@@ -1,0 +1,67 @@
+
+body
+  padding: 50px
+
+  #cal
+    position: relative
+    width: 340px
+    float: left
+
+    table
+      border-collapse: separate
+      table-layout: fixed
+      width: 100%
+
+    .prev, .next
+      cursor: pointer
+      fs: 1.2em
+
+    .prev
+      absolute: left 5px top 3px
+
+    .next
+      absolute: left 25px top 3px
+
+    .month
+      simple-gradient: custom_color
+      color: darken(custom_color, 48%)
+      text-shadow: 0 1px 1px rgba(#fff,.4)
+
+      th
+        position: relative
+        padding: 6px 0
+        border-radius: 4px 4px 0 0
+        border: 1px solid darken(custom_color, 40%)
+
+    .days
+
+      th
+        gradient: #ffffff #fcfdfd
+        color: #c2c3c9
+        fs: .7em
+        padding: 3px 9px
+        border-top: 1px solid #c7c9d4
+        border-bottom: 1px solid #c7c9d4
+        box-shadow: 0 1px 2px rgba(#000,.1)
+
+        &:first-child
+          border-left: 1px solid #c7c9d4
+
+        &:last-child
+          border-right: 1px solid #c7c9d4
+
+    td
+      border-bottom: 1px solid #e4e5eb
+      border-left: 1px solid #e4e5eb
+      position: relative
+      padding-top: 13%
+      fs: .7em
+
+      &:nth-child(7n)
+        border-right: 1px solid #e4e5eb
+
+      span
+        absolute: top 5px right 10px
+        bold()
+        color: #afacac
+        cursor: default
