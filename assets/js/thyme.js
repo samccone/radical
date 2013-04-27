@@ -87,7 +87,9 @@
           cell = document.createElement("td");
           dayOfWeek = moment("" + (this.currentDate.year()) + "-" + (this.currentDate.month() + 1) + "-" + days[0]).day();
           if (dayOfWeek === day) {
-            cell.innerHTML = days.shift();
+            var d = document.createElement("span");
+            d.innerHTML = days.shift();
+            cell.appendChild(d);
           }
           row.appendChild(cell);
         }
