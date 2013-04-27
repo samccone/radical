@@ -7,5 +7,15 @@ $ ->
   $('#cal').on 'click', '.prev', ->
     cal.prevMonth()
 
+  $('#cal td').one 'click', ->
+    $('.event').appendTo($('body'))
+
   $('#cal td').on 'click', ->
-    console.log 'event popup'
+    pos = $(@).offset()
+    pos_left = pos.left - 170 + $(@).width()/2
+    pos_top = pos.top + $(@).outerHeight()
+    console.log $(@).width()
+    $('.event').css(left: pos_left, top: pos_top).show()
+
+  $('.event').on 'click', '.close', ->
+    $('.event').hide()
