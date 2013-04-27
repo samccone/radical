@@ -44,7 +44,16 @@
       monthHeader.setAttribute('colspan', "7");
       monthHeader.innerHTML = this.currentDate.format("MMMM");
       row1 = document.createElement('tr');
+      prev = document.createElement('div');
+      prev.className = 'prev';
+      prev.innerHTML = '&laquo;'
+      next = document.createElement('div');
+      next.className = 'next';
+      next.innerHTML = '&raquo;'
+      monthHeader.appendChild(prev);
+      monthHeader.appendChild(next);
       row1.appendChild(monthHeader);
+      row1.className = 'month';
       return row1;
     };
 
@@ -56,6 +65,7 @@
         dow = _ref[_i];
         dowHeader = document.createElement('th');
         dowHeader.innerHTML = dow;
+        row2.className = 'days';
         row2.appendChild(dowHeader);
       }
       return row2;

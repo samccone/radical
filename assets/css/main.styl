@@ -5,3 +5,50 @@ base()
 
 body
   padding: 50px
+
+  #cal
+    position: relative
+
+    table
+      border-collapse: separate
+
+    .prev, .next
+      cursor: pointer
+      fs: 1.2em
+
+    .prev
+      absolute: left 5px top 3px
+
+    .next
+      absolute: left 25px top 3px
+
+    .month
+      gradient: #fa6e6e #ee4f51
+      color: #b02d2f
+      text-shadow: 0 1px 1px rgba(#fff,.4)
+
+      th
+        position: relative
+        padding: 6px 0
+        border-radius: 4px 4px 0 0
+        border: 1px solid #b82f30
+
+    .days
+
+      th
+        gradient: #ffffff #fcfdfd
+        color: #c2c3c9
+        fs: .7em
+        padding: 3px 9px
+        border-top: 1px solid #c7c9d4
+        border-bottom: 1px solid #c7c9d4
+        box-shadow: 0 1px 2px rgba(#000,.1)
+
+        &:first-child
+          border-left: 1px solid #c7c9d4
+
+        &:last-child
+          border-right: 1px solid #c7c9d4
+
+    td
+      text-align: center
