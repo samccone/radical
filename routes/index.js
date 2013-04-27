@@ -3,6 +3,8 @@ var Schema = null;
 exports.set = function(app, schema) {
   Schema = schema;
 
+  app.get('/', homePage);
+  app.get('/client', clientExample);
   app.get('/events', getEvents);
   app.post('/events/create', createEvent);
   app.get('/', homePage);
@@ -43,6 +45,11 @@ function createCalendar(cb) {
 /*
  * GET home page.
  */
+
 function homePage(req, res) {
   res.render('index', { cal_id: 1 });
+}
+
+function clientExample(req, res) {
+  res.render('client', { title: 'Express' });
 }
