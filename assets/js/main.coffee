@@ -23,17 +23,17 @@ $ ->
   #
 
   $('#cal td').one 'click', ->
-    $('.event').appendTo($('body'))
+    $('#cal-event').appendTo($('body'))
 
   $('#cal').on 'click', 'td', ->
     pos = $(@).offset()
     pos_left = pos.left - 170 + $(@).width()/2
     pos_top = pos.top + $(@).outerHeight()
-    $('.event').css(left: pos_left, top: pos_top).show()
-    $('.event [name="date"]').val($(this).data('stamp'));
+    $('#cal-event').css(left: pos_left, top: pos_top).show()
+    $('#cal-event [name="date"]').val($(this).data('stamp'));
 
-  $('.event').on 'click', '.close', ->
-    $('.event').hide()
+  $('#cal-event').on 'click', '.close', ->
+    $('#cal-event').hide()
 
   #
   # event placement

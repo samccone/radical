@@ -45,18 +45,15 @@ window.radical = (div, id) ->
     # event popup
     # 
 
-    event_popup = '<form method="post" enctype="multipart/form-data" action="/events/create" class="event"><div class="header"><p>New Event Title</p><div class="close">×</div></div><div class="body"></div></form>'
+    event_popup = '<form method="post" enctype="multipart/form-data" action="/events/create" id="cal-event"><div class="header"><p>New Event Title</p><div class="close">×</div></div><div class="body"></div></form>'
 
     $(event_popup).appendTo($('body'))
-
-    $("#{div} td").one 'click', ->
-      $('.events').appendTo($('body'))
 
     $(div).on 'click', 'td', ->
       pos = $(@).offset()
       pos_left = pos.left - 170 + $(@).width()/2
       pos_top = pos.top + $(@).outerHeight()
-      $('.event').css(left: pos_left, top: pos_top).show()
+      $('#cal-event').css(left: pos_left, top: pos_top).show()
 
       # get events on current day
       day_number = $(@).find('span').text()
@@ -65,13 +62,16 @@ window.radical = (div, id) ->
         return e.day == parseInt(day_number)
 
       # set header to date
-      $('.event').find('.header p').text(moment($(@).data('stamp')).format("dddd MMMM DD, YYYY"))
+      $('#cal-event').find('.header p').text(moment($(@).data('stamp')).format("dddd MMMM DD, YYYY"))
 
       # display events in popup
-      $('.event .body').empty()
+      $('#cal-event .body').empty()
       for e in day_events
-        console.log e
-        $('.event .body').append("<p>#{e.name}</p>")
+        $('#cal-event .body').append("<p>#{e.name}</p>")
+
+      if day_events.length < 1
+        $('#cal-event .body').append("<p class='empty'>no events today : (</p>")
+
 
     $('#cal-event').on 'click', '.close', ->
       $('#cal-event').hide()
