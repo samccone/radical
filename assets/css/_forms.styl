@@ -1,35 +1,79 @@
-form
-  
-  input[type=text]
-    border: 1px solid #c7c9d4
-    round: 3px
-    fs: .8em
-    padding: .5em
-    font-family: 'Open Sans', helvetica-neue
-    margin: 0 5px 5px 0
-    color: #787887
+.event
+  margin-left: 20px
+  float: right
+  width: 45%
 
-    &:focus
-      outline: 0
-      border-color: #a7aaba
-
-  select
-    border: 1px solid #c7c9d4
-    background: none
-    -webkit-appearance: none
-    fs: .8em
-    padding: .5em
-    font-family: 'Open Sans', helvetica-neue
-    color: #787887
-    margin: 0 5px 5px 0
-    -webkit-font-smoothing: antialiased
+  .header
+    background: blue
+    color: #fff
+    fs: 1em
+    padding: 9px 15px
+    border-radius: 4px 4px 0 0
+    group()
     bold()
+    position: relative
 
-    &:focus
-      outline: 0
-      border-color: #a7aaba
+    p
+      float: left
+      margin: 0
 
-  input[type=submit]
-    button: #0471e1
-    -webkit-font-smoothing: antialiased
-    transition()
+    .close
+      float: right
+      padding-left: 15px
+      height: 100%
+      cursor: pointer
+      hover-fade: .7
+      transiton()
+
+    &:before
+      content: ''
+      triangle: 'up' 7px blue
+      absolute: top -7px left 48%
+
+  .body
+    border: 1px solid #caccd6
+    padding: 10px
+
+    .between
+      margin-right: 5px
+      bold()
+      fs: .8em
+      color: #787887
+  
+    input[type=text]
+      border: 1px solid #c7c9d4
+      round: 3px
+      fs: .8em
+      padding: .5em
+      font-family: 'Open Sans', helvetica-neue
+      margin: 0 5px 5px 0
+      color: #787887
+      display: block
+      width: 96%
+
+      &:focus
+        outline: 0
+        border-color: #a7aaba
+
+    select
+      border: 1px solid #c7c9d4
+      background: none
+      -webkit-appearance: none
+      fs: .8em
+      padding: .5em
+      font-family: 'Open Sans', helvetica-neue
+      color: #787887
+      margin: 0 5px 5px 0
+      -webkit-font-smoothing: antialiased
+      bold()
+
+      &:focus
+        outline: 0
+        border-color: #a7aaba
+
+    input[type=submit]
+      button: #0471e1
+      -webkit-font-smoothing: antialiased
+      transition()
+      width: 100%
+      margin-top: 20px
