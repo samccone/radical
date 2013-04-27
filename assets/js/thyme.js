@@ -85,6 +85,8 @@
         row = document.createElement("tr");
         for (day = _k = 0; _k < 7; day = ++_k) {
           cell = document.createElement("td");
+          var ul = document.createElement("ul")
+          cell.appendChild(ul);
           dayOfWeek = moment("" + (this.currentDate.year()) + "-" + (this.currentDate.month() + 1) + "-" + days[0]).day();
           if (dayOfWeek === day) {
             var d = document.createElement("span");

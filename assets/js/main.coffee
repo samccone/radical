@@ -12,9 +12,11 @@ $ ->
 
   $('#cal').on 'click', '.next', ->
     cal.nextMonth()
+    render_events()
 
   $('#cal').on 'click', '.prev', ->
     cal.prevMonth()
+    render_events()
 
   # 
   # event popup
@@ -31,3 +33,27 @@ $ ->
 
   $('.event').on 'click', '.close', ->
     $('.event').hide()
+
+  # 
+  # event placement
+  # 
+
+  data = {
+    '2013': {
+      '3': [
+         { name: 'test event', day: 2, from: '11:00PM', to: '11:30PM' }
+        ,{ name: 'test event 2', day: 4, from: '11:00PM', to: '11:30PM' }
+        ,{ name: 'test event 3', day: 2, from: '11:00PM', to: '11:30PM' }
+      ]
+    }
+  }
+
+  render_events = ->
+    current = cal.renderedMonth()
+
+    if data[current.year] && data[current.year][current.month]
+      for e in data[current.year][current.month]
+        el = $(cal.getDay(e.day))
+        el.find('ul').append("<li>#{e.name}</li>")
+
+  render_events()
