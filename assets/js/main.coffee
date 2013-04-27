@@ -48,12 +48,15 @@ $ ->
     }
   }
 
+  colors = ['green', 'blue', 'red', 'purple', 'orange']
+
   render_events = ->
     current = cal.renderedMonth()
 
     if data[current.year] && data[current.year][current.month]
       for e in data[current.year][current.month]
         el = $(cal.getDay(e.day))
-        el.find('ul').append("<li>#{e.name}</li>")
+        color = colors[Math.floor(Math.random()*colors.length)]
+        el.find('ul').append("<li class='#{color}'>#{e.name}</li>")
 
   render_events()
