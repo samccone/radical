@@ -10,7 +10,7 @@ $ ->
   $('#cal td').one 'click', ->
     $('.event').appendTo($('body'))
 
-  $('#cal td').on 'click', ->
+  $('#cal').on 'click', 'td', ->
     pos = $(@).offset()
     pos_left = pos.left - 170 + $(@).width()/2
     pos_top = pos.top + $(@).outerHeight()
