@@ -5,23 +5,4 @@ block scripts
 
 block content
   #cal
-  form.event(method="post", enctype="multipart/form-data", action="/events/create")
-    input(type="number", value=1, name="calendar_id")
-
-    .header
-      p New Event Title
-      .close ×
-
-    .body
-      .row
-        select.from
-          option 10:30PM
-          option 11:00PM
-        span.between to
-        select.to
-          option 10:30PM
-          option 11:00PM
-
-      input(type="text", placeholder="location", name="location")
-      input(type="text", placeholder="info", name="info")
-      input(type="submit", value="Create This Event")
+  include _form
