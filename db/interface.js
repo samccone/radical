@@ -19,11 +19,16 @@ function getAndSetSchemas(cb) {
     name: String,
     from: String,
     to: String,
-    date: {type: Date, default: Date.now}
+    date: {type: Date, default: Date.now},
+    calendar_id: String
   });
 
-  var Calendar = db.define("Calendar", {});
-  Calendar.hasMany(Event, {as: "events", foreignKey: "calendar_id"});
+  var Calendar = db.define("Calendar", {
+    headerColor: String,
+    backgroundColor: String,
+    highlightColor: String,
+    fonts: String
+  });
 
   cb(null, {
     Calendar: Calendar,

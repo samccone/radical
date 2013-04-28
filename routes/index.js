@@ -6,12 +6,12 @@ exports.set = function(app, schema) {
   app.get('/', homePage);
   app.get('/client', clientExample);
   app.get('/events', getEvents);
+
   app.post('/events/create', createEvent);
 
   app.get('/embed/js/:id.js', getJS);
   app.get('/embed/css/:id', getCSS);
 }
-
 
 function getEvents(req, res) {
   Schema.Event.all(function(e, d) {
@@ -20,23 +20,13 @@ function getEvents(req, res) {
 }
 
 function createEvent(req, res) {
-  Schema.Calendar.findOne(req.body.calendar_id, function(err, cal) {
-    if (cal === null) {
-      createCalendar(req.body.calendar_id, function(err, cal) {
-        buildAndCreateEvent(cal, req.body, function(err, d) {
-          res.json(d);
-        });
-      });
-    } else {
-      buildAndCreateEvent(cal, req.body, function(err, d) {
-        res.json(d);
-      });
-    }
+  buildAndCreateEvent(req.body, function(err, d) {
+    res.json(d);
   });
 }
 
 function getEventsById(id, cb) {
-  Schema.Event.find({where: {calendar_id: id}}, cb);
+  Schema.Event.all({where: {calendar_id: id}}, cb);
 }
 
 function formatEvents(events) {
@@ -51,9 +41,9 @@ function formatEvents(events) {
   return toReturn;
 }
 
-function buildAndCreateEvent(cal, data, cb) {
+function buildAndCreateEvent(data, cb) {
   data.date = new Date(parseInt(data.date))
-  cal.events.create(data, cb);
+  Schema.Event.create(data, cb);
 }
 
 function createCalendar(cb) {
@@ -126,7 +116,9 @@ function getCSS(req, res){
  * GET home page.
  */
 function homePage(req, res) {
-  res.render('index', { cal_id: 1 });
+  Schema.Calendar.create(function(e, d) {
+    res.render('index', { cal_id: d._id });
+  });
 }
 
 function clientExample(req, res) {
