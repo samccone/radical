@@ -13,7 +13,7 @@ exports.set = function(app, schema) {
 
 function getEvents(req, res) {
   Schema.Event.all(function(e, d) {
-    res.json(d);
+    res.json(formatEvents(d));
   });
 }
 
@@ -31,6 +31,18 @@ function createEvent(req, res) {
       });
     }
   });
+}
+
+function formatEvents(events) {
+  var toReturn = {};
+  events.forEach(function(d) {
+    _d = d.date;
+    toReturn[_d.getFullYear()] = toReturn[_d.getFullYear()] || {};
+    toReturn[_d.getFullYear()][_d.getDate()] = toReturn[_d.getFullYear()][_d.getDate()] || [];
+    toReturn[_d.getFullYear()][_d.getDate()].push(d);
+  });
+
+  return toReturn;
 }
 
 function buildAndCreateEvent(cal, data, cb) {
