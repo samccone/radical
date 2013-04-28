@@ -1,6 +1,7 @@
 #= require "jquery.js"
 #= require "moment.js"
 #= require "thyme.js"
+#= require "addtocalendar.js"
 
 window.radical = (div, id) ->
 
@@ -52,6 +53,24 @@ window.radical = (div, id) ->
 
     if day_events.length < 1
       $('#cal-event .body').append("<p class='empty'>no events today : (</p>")
+
+    console.log day_events[0].date
+
+    $('.add-to-calendar').on 'click', ->
+      $('.add-to-calendarmycalendar').remove()
+
+      # add to calendar button
+      calendarEl = addToCalendar
+        class: 'mycalendar'
+        id: '#calendar'
+        data:
+          title: day_events[0].name
+          start: new Date(day_events[0].date),
+          duration: 120,
+          address: day_events[0].location
+          description: day_events[0].name
+
+      $(@).append(calendarEl)
 
 
   $('#cal-event').on 'click', '.close', ->

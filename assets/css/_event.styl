@@ -137,6 +137,35 @@
       margin-top: 3px
       transition()
       cursor: pointer
+      position: relative
 
       &:hover
         background-color: darken(#cdcdcd, 15%)
+
+.add-to-calendarmycalendar
+  background: rgba(#000,.8)
+  width: 200px
+  color: #fff
+  padding: 10px
+  round: 3px
+  absolute: top -48px left 48px
+
+  &:before
+    content: ""
+    triangle: left 10px rgba(#000,.8)
+    absolute: top 48% left -10px
+
+  label
+    bold()
+    text-align: center
+    inline-block()
+    margin-bottom: 7px
+
+  .add-to-calendar-toggle
+    display: none
+
+  a
+    color: #fff
+    display: block
+    text-decoration: none
+    fs: .8em
