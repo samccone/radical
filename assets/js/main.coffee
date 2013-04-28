@@ -21,7 +21,7 @@ $ ->
       if ($(this).val())
         toReturn[$(this).attr('data-name')] = $(this).val()
       else
-        toReturn[$(this).attr('data-name')] = $(this).text()
+        toReturn[$(this).attr('data-name')] = JSON.stringify(hexToRgb($(this).text()));
 
     $.post "/cal/edit/#{window.location.href.split("/")[5]}", toReturn
 
@@ -89,40 +89,40 @@ $ ->
   #
   # color pickers
   #
-
-  # RGBA Converter
   componentToHex = (c) ->
-    hex = c.toString(16)
-    (if hex.length is 1 then "0" + hex else hex)
+    hex = c.toString(16);
+    if hex.length == 1 then "0" + hex else hex
 
   rgbToHex = (r, g, b) ->
-    "#" + componentToHex(r) + componentToHex(g) + componentToHex(b)
+    "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+
+  hexToRgb = (hex) ->
+    result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+    [parseInt(result[1], 16), parseInt(result[2], 16), parseInt(result[3], 16)]
 
   # Initialize color picker
+
   colorPicker = new picker
   colorPicker.el.appendTo('.colors')
-
+  opened = null
+  openedColorPicker = null
   # Open/ close color picker
-  $('.color-selector').on 'click', ->
+
+  $('.color-selector').on 'click', (e) ->
+    opened = $(e.currentTarget)
+    $('.header-box.selected').removeClass("selected")
+    opened.parent().addClass("selected")
+
     openedColorPicker = $('.color-picker')
-    openedColorPicker.toggle()
+    $('.color-picker').show()
+    colorPicker.color(opened.next().text())
 
   colorPicker.on 'change', (color) ->
-    $('.color-selector').css('background', color)
+    opened.css('background', color)
     theColor = rgbToHex(color.r, color.g, color.b)
-    $('.selected-color-id').text(theColor)
+    opened.next().text(theColor)
     colorArray = [color.r, color.g, color.b, 1]
-
-  applyColor = (el) ->
-    colorPicker.on 'change', (color) ->
-      theColor = rgbToHex(color.r, color.g, color.b)
-      $(el).css('background', theColor)
-
-      $(el).next().text(theColor)
-      colorArray = [color.r, color.g, color.b, 1]
-
-  $('.color-selector').on 'click', ->
-    applyColor(this)
+    opened.data("custom-color", colorArray)
 
   #
   # inject embed code
@@ -136,4 +136,5 @@ $ ->
   $(document).on 'click', (e) ->
     unless ($(e.target)[0].tagName == 'CANVAS' || $(e.target).attr('class') == 'color-selector')
       saveConfig()
+      $('.header-box.selected').removeClass("selected")
       $('.color-picker').hide()
