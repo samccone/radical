@@ -7,7 +7,6 @@ exports.set = function(app, schema) {
   app.get('/client', clientExample);
   app.get('/events', getEvents);
   app.post('/events/create', createEvent);
-  app.get('/', homePage);
 }
 
 
