@@ -100,7 +100,6 @@ function getCSS(req, res){
 /*
  * GET home page.
  */
-
 function homePage(req, res) {
   res.render('index', { cal_id: 1 });
 }
