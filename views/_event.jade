@@ -10,15 +10,23 @@ form#cal-event(method="post", enctype="multipart/form-data", action="/events/cre
       input(type="number", name="date", hidden)
       select.from(name="from")
         - for(var i = 0; i < 24; ++i)
-          - if (i < 24)
-            - val = i%12+1 + ":" + "00 " + (i < 12 ? "am" : "pm");
-            option(value=val)= val
+          - val = i%12+1 + ":" + "00 " + (i < 12 ? "am" : "pm");
+            - current_time = (new Date).getHours()
+            - if (i == current_time)
+              option(value=val, selected)= val
+            - else
+              option(value=val)= val
+
       span.between to
       select.to(name="to")
         - for(var i = 0; i < 24; ++i)
-          - if (i < 24)
-            - val = i%12+1 + ":" + "00 " + (i < 12 ? "am" : "pm");
+          - val = i%12+1 + ":" + "00 " + (i < 12 ? "am" : "pm");
+          - current_time = (new Date).getHours()
+          - if (i == current_time + 1)
+            option(value=val, selected)= val
+          - else
             option(value=val)= val
+
 
     input(type="text", placeholder="location", name="location")
     input(type="text", placeholder="info", name="info")
