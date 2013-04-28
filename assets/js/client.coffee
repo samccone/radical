@@ -40,7 +40,7 @@ window.radical = (div, id) ->
     day_number = $(@).find('span').text()
     current = cal.renderedMonth()
     day_events = events[current.year][current.month].filter (e) =>
-      return e.day == parseInt(day_number)
+      return new Date(e.date).getDate() == parseInt(day_number)
 
     # set header to date
     $('#cal-event').find('.header p').text(moment($(@).data('stamp')).format("dddd MMMM DD, YYYY"))
