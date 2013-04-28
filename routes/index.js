@@ -83,22 +83,43 @@ function getJS(req, res){
   // ast = pro.ast_squeeze(ast);
   // var compressed_js = pro.gen_code(ast);
 
-  var injector = uncompressed + "var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '/embed/css/" + req.params.id + ".css'; document.head.appendChild(css)";
+  var events = [
+    { whatever: 'whatever' }
+  ]
+
+  var injector = "var events = " + JSON.stringify(events) + ";" + uncompressed + "var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '/embed/css/" + req.params.id + ".css'; document.head.appendChild(css)";
   res.header('Content-Type', 'application/x-javascript');
   res.send(injector);
 }
 
 function getCSS(req, res){
 
+  var config = {
+    colors: {
+      header: new stylus.nodes.RGBA(245,77,78,1),
+      background: new stylus.nodes.RGBA(255,255,255,1),
+      hilight: new stylus.nodes.RGBA(10,40,200,1)
+    },
+    fonts: 'Open Sans'
+  }
+
   // compile main.styl and compress
   var css_path = path.join(__dirname, '../assets/css')
   var styl = fs.readFileSync(path.join(css_path, 'main.styl'), 'utf8');
 
-  stylus(styl).set('compress', true).include(css_path).use(roots_css()).render(function(err, compiled){
-    err && console.error(err);
-    res.header('Content-Type', 'text/css');
-    res.send(compiled);
-  });
+  stylus(styl)
+    .set('compress', true)
+    .include(css_path)
+    .use(roots_css())
+    .define('header-color', config.colors.header)
+    .define('background-color', config.colors.background)
+    .define('hilight-color', config.colors.hilight)
+    .define('fonts', config.fonts)
+    .render(function(err, compiled){
+      err && console.error(err);
+      res.header('Content-Type', 'text/css');
+      res.send(compiled);
+    });
 
 }
 

@@ -1,112 +1,109 @@
+#cal
+  position: relative
+  max-width: 650px
 
-body
-  padding: 50px
+  table
+    border-collapse: separate
+    table-layout: fixed
+    width: 100%
+    background: background-color
 
-  #cal
-    position: relative
-    max-width: 650px
+  .prev, .next
+    cursor: pointer
+    fs: 1.2em
 
-    table
-      border-collapse: separate
-      table-layout: fixed
-      width: 100%
+  .prev
+    absolute: left 5px top 3px
 
-    .prev, .next
-      cursor: pointer
-      fs: 1.2em
+  .next
+    absolute: left 25px top 3px
 
-    .prev
-      absolute: left 5px top 3px
+  .month
+    simple-gradient: header-color
+    color: darken(header-color, 48%)
+    text-shadow: 0 1px 1px rgba(#fff,.4)
 
-    .next
-      absolute: left 25px top 3px
-
-    .month
-      simple-gradient: custom_color
-      color: darken(custom_color, 48%)
-      text-shadow: 0 1px 1px rgba(#fff,.4)
-
-      th
-        position: relative
-        padding: 6px 0
-        border-radius: 4px 4px 0 0
-        border: 1px solid darken(custom_color, 40%)
-
-    .days
-
-      th
-        gradient: #fff #fcfdfd
-        color: #c2c3c9
-        fs: .7em
-        padding: 3px 9px
-        border-top: 1px solid #c7c9d4
-        border-bottom: 1px solid #c7c9d4
-        box-shadow: 0 1px 2px rgba(#000,.1)
-
-        &:first-child
-          border-left: 1px solid #c7c9d4
-
-        &:last-child
-          border-right: 1px solid #c7c9d4
-
-    td
-      border-bottom: 1px solid #e4e5eb
-      border-left: 1px solid #e4e5eb
+    th
       position: relative
-      padding-top: 13%
-      overflow: hidden
-      cursor: pointer
+      padding: 6px 0
+      border-radius: 4px 4px 0 0
+      border: 1px solid darken(header-color, 40%)
 
-      &:nth-child(7n)
-        border-right: 1px solid #e4e5eb
+  .days
 
-      span
-        absolute: top 5px right 10px
-        bold()
-        color: #afacac
-        cursor: default
+    th
+      gradient: #fff #fcfdfd
+      color: #c2c3c9
+      fs: .7em
+      padding: 3px 9px
+      border-top: 1px solid #c7c9d4
+      border-bottom: 1px solid #c7c9d4
+      box-shadow: 0 1px 2px rgba(#000,.1)
+
+      &:first-child
+        border-left: 1px solid #c7c9d4
+
+      &:last-child
+        border-right: 1px solid #c7c9d4
+
+  td
+    border-bottom: 1px solid #e4e5eb
+    border-left: 1px solid #e4e5eb
+    position: relative
+    padding-top: 13%
+    overflow: hidden
+    cursor: pointer
+
+    &:nth-child(7n)
+      border-right: 1px solid #e4e5eb
+
+    span
+      absolute: top 5px right 10px
+      bold()
+      color: #afacac
+      cursor: default
+      fs: .7em
+
+    ul
+      reset-list()
+      absolute: top 20px
+
+      li
+        padding-left: 15px
         fs: .7em
+        position: relative
 
-      ul
-        reset-list()
-        absolute: top 20px
+        @media only screen and (max-width: 700px)
+          font-size: 0
 
-        li
-          padding-left: 15px
-          fs: .7em
-          position: relative
-
-          @media only screen and (max-width: 700px)
-            font-size: 0
-
-          &.blue
-            color: light-blue
-            &:before
-              background-color: light-blue
-
-          &.green
-            color: #66c8ca
-            &:before
-              background-color: #66c8ca
-
-          &.red
-            color: #f26b4b
-            &:before
-              background-color: #f26b4b
-
-          &.purple
-            color: #8380bd
-            &:before
-              background-color: #8380bd
-
-          &.orange
-            color: #f99513
-            &:before
-              background-color: #f99513
-
+        &.blue
+          color: light-blue
           &:before
-            content: ""
-            size: 5px
-            absolute: top 4px left 5px
-            rounded()
+            background-color: light-blue
+
+        &.green
+          color: #66c8ca
+          &:before
+            background-color: #66c8ca
+
+        &.red
+          color: #f26b4b
+          &:before
+            background-color: #f26b4b
+
+        &.purple
+          color: #8380bd
+          &:before
+            background-color: #8380bd
+
+        &.orange
+          color: #f99513
+          &:before
+            background-color: #f99513
+
+        &:before
+          content: ""
+          size: 5px
+          absolute: top 4px left 5px
+          rounded()
 
