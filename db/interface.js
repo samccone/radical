@@ -4,7 +4,7 @@ var colors    = require('colors');
 
 exports.connect = function(cb) {
   db = new Schema('mongodb', {
-    url: process.env['db'] || 'mongodb://localhost/db'
+    url: process.env['DB'] || 'mongodb://localhost/db'
   });
 
   db.on('connected', function() {
