@@ -7,6 +7,7 @@ exports.set = function(app, schema) {
 
   app.get("/cal/edit/:id", homePage);
   app.post("/cal/edit/:id", updateCalStyles);
+  app.get("/cal/:id", getCalInfo);
 
   app.get('/client', clientExample);
   app.get('/events', getEvents);
@@ -23,6 +24,12 @@ function updateCalStyles(req, res) {
     d.updateAttributes(req.body, function(e, d) {
       res.json(d);
     });
+  });
+}
+
+function getCalInfo(req, res){
+  Schema.Calendar.all({where: {id: req.params.id}}, function(e, d) {
+    res.json(d);
   });
 }
 
