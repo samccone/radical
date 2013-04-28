@@ -39,7 +39,7 @@ window.radical = (div, id) ->
     # get events on current day
     day_number = $(@).find('span').text()
     current = cal.renderedMonth()
-    day_events = data[current.year][current.month].filter (e) =>
+    day_events = events[current.year][current.month].filter (e) =>
       return e.day == parseInt(day_number)
 
     # set header to date
