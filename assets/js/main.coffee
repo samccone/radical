@@ -30,11 +30,15 @@ $ ->
 
   hidePopupEvent = ->
     $('#cal-event').hide()
+    $('#cal-event input[type="text"]').val('')
+    $('#cal').find(".active").removeClass 'active'
 
   $('#cal td').one 'click', ->
     $('#cal-event').appendTo($('body'))
 
   $('#cal').on 'click', 'td', ->
+    $('#cal').find(".active").removeClass 'active'
+    $(this).addClass 'active'
     pos = $(@).offset()
     pos_left = pos.left - 170 + $(@).width()/2
     pos_top = pos.top + $(@).outerHeight()

@@ -53,6 +53,10 @@
     padding-top: 13%
     overflow: hidden
     cursor: pointer
+    transition: background 300ms
+
+    &:hover, &.active, &:active
+      background: hilight-color
 
     &:nth-child(7n)
       border-right: 1px solid #e4e5eb
