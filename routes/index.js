@@ -7,7 +7,6 @@ exports.set = function(app, schema) {
 
   app.get("/cal/edit/:id", homePage);
   app.post("/cal/edit/:id", updateCalStyles);
-  app.get("/cal/:id", getCalInfo);
 
   app.get('/client', clientExample);
   app.get('/events', getEvents);
@@ -16,7 +15,7 @@ exports.set = function(app, schema) {
   app.post('/events/create', createEvent);
 
   app.get('/embed/js/:id.js', getJS);
-  app.get('/embed/css/:id', getCSS);
+  app.get('/embed/css/:id.css', getCSS);
 }
 
 function updateCalStyles(req, res) {
@@ -27,10 +26,8 @@ function updateCalStyles(req, res) {
   });
 }
 
-function getCalInfo(req, res){
-  Schema.Calendar.all({where: {id: req.params.id}}, function(e, d) {
-    res.json(d);
-  });
+function getCalInfo(id, cb){
+  Schema.Calendar.all({where: {id: id}}, cb);
 }
 
 function generateCal(req, res) {
@@ -125,23 +122,32 @@ function getCSS(req, res){
     fonts: 'Open Sans'
   }
 
-  // compile main.styl and compress
-  var css_path = path.join(__dirname, '../assets/css')
-  var styl = fs.readFileSync(path.join(css_path, 'client.styl'), 'utf8');
+  getCalInfo(req.params.id, function(err, config){
+    
+    // compile main.styl and compress
+    var css_path = path.join(__dirname, '../assets/css')
+    var styl = fs.readFileSync(path.join(css_path, 'client.styl'), 'utf8');
 
-  stylus(styl)
-    .set('compress', true)
-    .include(css_path)
-    .use(roots_css())
-    .define('header-color', config.colors.header)
-    .define('background-color', config.colors.background)
-    .define('hilight-color', config.colors.hilight)
-    .define('fonts', config.fonts)
-    .render(function(err, compiled){
-      err && console.error(err);
-      res.header('Content-Type', 'text/css');
-      res.send(compiled);
-    });
+    stylus(styl)
+      .set('compress', true)
+      .include(css_path)
+      .use(roots_css())
+      .define('header-color', transform(config[0].headerColor))
+      .define('background-color', transform(config[0].backgroundColor))
+      .define('hilight-color', transform(config[0].highlightColor))
+      .define('fonts', config[0].fonts)
+      .render(function(err, compiled){
+        err && console.error(err);
+        res.header('Content-Type', 'text/css');
+        res.send(compiled);
+      });
+
+  });
+
+  function transform(a){
+    var b = JSON.parse(a).concat([1])
+    return new stylus.nodes.RGBA(b[0], b[1], b[2], b[3])
+  }
 
 }
 
