@@ -65,6 +65,7 @@ $ ->
 
   #
   # color pickers
+  # 
 
   # RGBA Converter
   componentToHex = (c) ->
@@ -86,3 +87,11 @@ $ ->
     $('.selected-color-id').text(theColor)
     colorArray = [color.r, color.g, color.b, 1]
     console.log(colorArray)
+
+  # 
+  # inject embed code
+  # 
+
+  embed_id = window.location.toString().match(/.*?edit\/(.*)/)[1]
+  embed_code = "<script src='http://jenius-radical.jitsu.com/embed/js/#{embed_id}.js'><script>radical('#cal')</script>"
+  $('.embed-code-box').text(embed_code)
