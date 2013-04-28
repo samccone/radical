@@ -2,11 +2,13 @@ doctype 5
 html
   head
     != css('main')
+    != css('picker')
     link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans:700,400')
   body
     block content
 
   != js('jquery')
+  != js('picker')
   != js('moment')
   != js('thyme')
   != js('main')

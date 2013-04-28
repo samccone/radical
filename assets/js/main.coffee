@@ -61,3 +61,10 @@ $ ->
           render_event(e)
 
   render_events()
+
+  #
+  # color pickers
+  pic = new picker
+  pic.el.appendTo('.colors')
+  $('.color-selector').on 'click', ->
+    $('.color-picker').toggle()
