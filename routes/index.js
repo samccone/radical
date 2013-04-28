@@ -7,6 +7,7 @@ exports.set = function(app, schema) {
   app.get('/client', clientExample);
   app.get('/events', getEvents);
   app.post('/events/create', createEvent);
+
   app.get('/embed/js/:id.js', getJS);
   app.get('/embed/css/:id', getCSS);
 }
@@ -32,6 +33,10 @@ function createEvent(req, res) {
       });
     }
   });
+}
+
+function getEventById(id, cb) {
+  Schema.Event.find({where: {calendar_id: id}}, cb);
 }
 
 function formatEvents(events) {
