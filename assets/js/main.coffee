@@ -124,7 +124,7 @@ $ ->
     opened.next().text(theColor)
     colorArray = [color.r, color.g, color.b, 1]
     opened.data("custom-color", colorArray)
-
+    $(opened.data("target")).css(opened.data("cssp"), theColor);
   #
   # inject embed code
   #
@@ -142,6 +142,7 @@ $ ->
       saveConfig()
       $('.header-box.selected').removeClass("selected")
       $('.color-picker').hide()
+
 
   # clip = new ZeroClipboard($('.embed-code-box')[0], { movePath: '/ZeroClipboard.swf' })
 
