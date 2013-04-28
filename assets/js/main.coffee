@@ -143,7 +143,7 @@ $ ->
       $('.header-box.selected').removeClass("selected")
       $('.color-picker').hide()
 
-  $('.title').zclip({
-    path:'/ZeroClipboard.swf',
-    copy:$('.embed-code-box').text()
-    })
+  # clip = new ZeroClipboard($('.embed-code-box')[0], { movePath: '/ZeroClipboard.swf' })
+
+  # clip.on 'complete', (c, args) ->
+  #   console.log 'done'
