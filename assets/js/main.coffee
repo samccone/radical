@@ -132,7 +132,7 @@ $ ->
   #
 
   embed_id = window.location.toString().match(/.*?edit\/(.*)/)[1]
-  embed_code = "<script src='http://jenius-radical.jitsu.com/embed/js/#{embed_id}.js'><script>radical('#cal')</script>"
+  embed_code = "<script src='http://jenius-radical.jitsu.com/embed/js/#{embed_id}.js'></script><script>radical('#cal')</script>"
   $('.embed-code-box').text(embed_code)
 
   # Hide picker upon click
