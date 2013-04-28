@@ -64,7 +64,24 @@ $ ->
 
   #
   # color pickers
-  pic = new picker
-  pic.el.appendTo('.colors')
+
+  # RGBA Converter
+  componentToHex = (c) ->
+    hex = c.toString(16)
+    (if hex.length is 1 then "0" + hex else hex)
+  rgbToHex = (r, g, b) ->
+    "#" + componentToHex(r) + componentToHex(g) + componentToHex(b)
+
+  colorPicker = new picker
+  colorPicker.el.appendTo('.colors')
+
   $('.color-selector').on 'click', ->
-    $('.color-picker').toggle()
+    openedColorPicker = $('.color-picker')
+    openedColorPicker.toggle()
+
+  colorPicker.on 'change', (color) ->
+    $('.color-selector').css('background', color)
+    theColor = rgbToHex(color.r, color.g, color.b)
+    $('.selected-color-id').text(theColor)
+    colorArray = [color.r, color.g, color.b, 1]
+    console.log(colorArray)
