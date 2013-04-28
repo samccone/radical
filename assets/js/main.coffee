@@ -1,26 +1,24 @@
 $ ->
 
-  #
   # init calendar
-  #
-
   cal = new Thyme $("#cal")[0]
 
-  #
   # month pickers
-  #
-
   $('#cal').on 'click', '.next', ->
     cal.nextMonth()
     render_events()
+    hidePopupEvent()
 
   $('#cal').on 'click', '.prev', ->
     cal.prevMonth()
     render_events()
+    hidePopupEvent()
 
   #
   # event popup
-  #
+
+  hidePopupEvent = ->
+    $('#cal-event').hide()
 
   $('#cal td').one 'click', ->
     $('#cal-event').appendTo($('body'))
@@ -32,32 +30,20 @@ $ ->
     $('#cal-event').css(left: pos_left, top: pos_top).show()
     $('#cal-event [name="date"]').val($(this).data('stamp'));
 
-  $('#cal-event').on 'click', '.close', ->
-    $('#cal-event').hide()
+  $('#cal-event .close').on 'click', hidePopupEvent
+
 
   #
   # event placement
-  #
-
-  data = {
-    '2013': {
-      '3': [
-         { name: 'test event', day: 2, from: '11:00PM', to: '11:30PM' }
-        ,{ name: 'test event 2', day: 4, from: '11:00PM', to: '11:30PM' }
-        ,{ name: 'test event 3', day: 2, from: '11:00PM', to: '11:30PM' }
-      ]
-    }
-  }
-
-  colors = ['green', 'blue', 'red', 'purple', 'orange']
-
   render_events = ->
-    current = cal.renderedMonth()
+    colors = ['green', 'blue', 'red', 'purple', 'orange']
 
-    if data[current.year] && data[current.year][current.month]
-      for e in data[current.year][current.month]
-        el = $(cal.getDay(e.day))
-        color = colors[Math.floor(Math.random()*colors.length)]
-        el.find('ul').append("<li class='#{color}'>#{e.name}</li>")
+    $.get "/events", (data) ->
+      current = cal.renderedMonth()
+      if data[current.year] && data[current.year][current.month]
+        for e in data[current.year][current.month]
+          el = $(cal.getDay(new Date(e.date).getDate()))
+          color = colors[Math.floor(Math.random()*colors.length)]
+          el.find('ul').append("<li class='#{color}'>#{e.name}</li>")
 
   render_events()
