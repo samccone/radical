@@ -16,7 +16,7 @@ exports.connect = function(cb) {
 function getAndSetSchemas(cb) {
   var Event = db.define("Event", {
     location: String,
-    info: String,
+    name: String,
     from: String,
     to: String,
     date: {type: Date, default: Date.now}
