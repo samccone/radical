@@ -24,9 +24,9 @@ function getAndSetSchemas(cb) {
   });
 
   var Calendar = db.define("Calendar", {
-    headerColor: String,
-    backgroundColor: String,
-    highlightColor: String,
+    headerColor: { type: String, default: '[249,84,85]' },
+    backgroundColor: { type: String, default: '[255,255,255]' },
+    highlightColor: { type: String, default: '[230,243,255]' },
     fonts: String
   });
 
