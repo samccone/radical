@@ -61,23 +61,13 @@ window.radical = (div, id) ->
   # event placement
   # 
 
-  # make a request based on the id
-  data = {
-    '2013': {
-      '3': [
-         { name: 'test event', day: 2, from: '11:00PM', to: '11:30PM' }
-        ,{ name: 'test event 2', day: 4, from: '11:00PM', to: '11:30PM' }
-        ,{ name: 'test event 3', day: 2, from: '11:00PM', to: '11:30PM' }
-      ]
-    }
-  }
-
   colors = ['green', 'blue', 'red', 'purple', 'orange']
 
   render_events = ->
     current = cal.renderedMonth()
 
-    if data[current.year] && data[current.year][current.month]
+    # events is injected
+    if events[current.year] && data[current.year][current.month]
       for e in data[current.year][current.month]
         el = $(cal.getDay(e.day))
         color = colors[Math.floor(Math.random()*colors.length)]

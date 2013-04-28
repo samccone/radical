@@ -35,7 +35,7 @@ function createEvent(req, res) {
   });
 }
 
-function getEventById(id, cb) {
+function getEventsById(id, cb) {
   Schema.Event.find({where: {calendar_id: id}}, cb);
 }
 
@@ -83,13 +83,12 @@ function getJS(req, res){
   // ast = pro.ast_squeeze(ast);
   // var compressed_js = pro.gen_code(ast);
 
-  var events = [
-    { whatever: 'whatever' }
-  ]
+  getEventsById(req.params.id, function(events){
+    var injector = "window.events = " + JSON.stringify(events) + ";" + uncompressed + "var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '/embed/css/" + req.params.id + ".css'; document.head.appendChild(css)";
+    res.header('Content-Type', 'application/x-javascript');
+    res.send(injector);
+  });
 
-  var injector = "var events = " + JSON.stringify(events) + ";" + uncompressed + "var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '/embed/css/" + req.params.id + ".css'; document.head.appendChild(css)";
-  res.header('Content-Type', 'application/x-javascript');
-  res.send(injector);
 }
 
 function getCSS(req, res){
@@ -105,7 +104,7 @@ function getCSS(req, res){
 
   // compile main.styl and compress
   var css_path = path.join(__dirname, '../assets/css')
-  var styl = fs.readFileSync(path.join(css_path, 'main.styl'), 'utf8');
+  var styl = fs.readFileSync(path.join(css_path, 'client.styl'), 'utf8');
 
   stylus(styl)
     .set('compress', true)
