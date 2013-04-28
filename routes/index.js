@@ -5,6 +5,8 @@ var Schema = null;
 exports.set = function(app, schema) {
   Schema = schema;
 
+  app.get('/auth', loginPage);
+
   app.get('/', generateCal);
 
   app.get("/cal/edit/:id", homePage);
@@ -170,4 +172,8 @@ function homePage(req, res) {
 
 function clientExample(req, res) {
   res.render('client', { title: 'Express' });
+}
+
+function loginPage(req, res) {
+  res.render('login', { title: 'Express' });
 }

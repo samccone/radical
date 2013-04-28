@@ -28,3 +28,60 @@ body
   position: relative
   max-width 30%
   float: left
+
+#login
+  width: 344px
+  margin: 100px auto
+  
+  .icons
+    border: 1px solid #c7c9d4
+    round: 5px
+    size: 344 91
+    group()
+    margin-bottom: 15px
+
+    & > .fb, & > .twitta
+      size: 50% 100%
+      float: left
+      cursor: pointer
+      transition()
+      border-box()
+
+      &:hover
+        background-color: darken(#fff,5%)
+
+    .fb
+      background: url('/img/fb.png') center center no-repeat
+      border-right: 1px solid #c7c9d4
+      
+    .twitta
+      background: url('/img/twitta.png') center center no-repeat
+
+  .buttons
+
+    a
+      bold()
+      color: rgba(#fff,.8)
+      text-decoration: none
+      width: 100%
+      inline-block()
+      text-align: center
+      round: 3px
+      padding: 10px 0
+      fs: .9em
+      box-shadow: inset 0 1px 1px rgba(#fff,.2)
+      text-shadow: 0 1px 1px rgba(#000,.2)
+      transition()
+
+      &:hover
+        background-position: 0 -13px
+    
+    .fb
+      background-color: darken(#32508b, 10%) 
+      simple-gradient: #32508b
+      margin-bottom: 5px
+      border: 1px solid darken(#32508b, 20%)
+
+    .twitta
+      simple-gradient: #0293c0
+      border: 1px solid darken(#0293c0, 20%)
