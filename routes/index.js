@@ -11,7 +11,8 @@ exports.set = function(app, schema) {
 
   app.get('/embed/js/:id.js', getJS);
   app.get('/embed/css/:id', getCSS);
-}
+
+} 
 
 function getEvents(req, res) {
   Schema.Event.all(function(e, d) {
@@ -73,7 +74,8 @@ function getJS(req, res){
   // ast = pro.ast_squeeze(ast);
   // var compressed_js = pro.gen_code(ast);
 
-  getEventsById(req.params.id, function(events){
+  getEventsById(req.params.id, function(err, events){
+    events = formatEvents(events);
     var injector = "window.events = " + JSON.stringify(events) + ";" + uncompressed + "var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '/embed/css/" + req.params.id + ".css'; document.head.appendChild(css)";
     res.header('Content-Type', 'application/x-javascript');
     res.send(injector);

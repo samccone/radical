@@ -67,9 +67,11 @@ window.radical = (div, id) ->
     current = cal.renderedMonth()
 
     # events is injected
-    if events[current.year] && data[current.year][current.month]
-      for e in data[current.year][current.month]
-        el = $(cal.getDay(e.day))
+    if events[current.year] && events[current.year][current.month]
+      for e in events[current.year][current.month]
+        date = new Date(e.date).getDate()
+        console.log date
+        el = $(cal.getDay(date))
         color = colors[Math.floor(Math.random()*colors.length)]
         el.find('ul').append("<li class='#{color}'>#{e.name}</li>")
 
