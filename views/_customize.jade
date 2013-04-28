@@ -30,3 +30,27 @@
       li.month-view.active Month View
 
     .dashed
+
+    .select-font-label Select Font:
+    select.font-selector
+      option Open Sans, Helvetica, Sans-serif
+      option Bananas, Tiny Apples, Yellow Boat
+      option Comic Sans, Lucida Grande, Water Bottle
+
+    .line
+
+    .embed-code
+      .title Embed Code
+      .label
+        | Copy this code into your website to embeded your calendar.
+      .embed-code-box
+        pre
+          | M.blogFeed($('#blog_feed'));
+          | setRetinaImages();
+          | M.peoplePage.init();
+          | if ($('#the-wheel').length) {
+          |   M.the_wheel = M.how_we_work();
+          |   $.get('/api/iteration_count', function(d){
+          |     M.the_wheel.display.state.iterations = d.count;
+          |   });
+          | }
