@@ -27,7 +27,6 @@ form#cal-event(method="post", enctype="multipart/form-data", action="/events/cre
           - else
             option(value=val)= val
 
-
+    input(type="text", placeholder="name", name="name")
     input(type="text", placeholder="location", name="location")
-    input(type="text", placeholder="info", name="info")
     input(type="submit", value="Create This Event")
