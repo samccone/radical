@@ -4,7 +4,10 @@ exports.set = function(app, schema) {
   Schema = schema;
 
   app.get('/', generateCal);
+
   app.get("/cal/edit/:id", homePage);
+  app.post("/cal/edit/:id", updateCalStyles);
+
   app.get('/client', clientExample);
   app.get('/events', getEvents);
   app.get('/events/:id', getAllEventsById);
@@ -13,7 +16,14 @@ exports.set = function(app, schema) {
 
   app.get('/embed/js/:id.js', getJS);
   app.get('/embed/css/:id', getCSS);
+}
 
+function updateCalStyles(req, res) {
+  Schema.Calendar.find(req.params.id, function (e, d) {
+    d.updateAttributes(req.body, function(e, d) {
+      res.json(d);
+    });
+  });
 }
 
 function generateCal(req, res) {

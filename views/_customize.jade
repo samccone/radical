@@ -8,19 +8,19 @@
       li.color-customization
         .header-box
           .color-selector
-          .selected-color-id #ed4343
+          .selected-color-id(data-name="headerColor", data-val="true") #ed4343
         .label Header Color
 
       li.background-color
         .header-box
           .color-selector
-          .selected-color-id #f9f9f9
+          .selected-color-id(data-name="backgroundColor", data-val="true") #f9f9f9
         .label Background Color
 
       li.highlight-color
         .header-box
           .color-selector
-          .selected-color-id #8380bd
+          .selected-color-id(data-name="highlightColor", data-val="true") #8380bd
         .label Highlight Color
 
     .dashed
@@ -32,10 +32,10 @@
     .dashed
 
     .select-font-label Select Font:
-    select.font-selector
-      option Open Sans, Helvetica, Sans-serif
-      option Bananas, Tiny Apples, Yellow Boat
-      option Comic Sans, Lucida Grande, Water Bottle
+    select.font-selector(data-name="fonts", data-val="true")
+      option(value="Open Sans, Helvetica, Sans-serif") Open Sans, Helvetica, Sans-serif
+      option(value="Bananas, Tiny Apples, Yellow Boat") Bananas, Tiny Apples, Yellow Boat
+      option(value="Comic Sans, Lucida Grande, Water Bottle") Comic Sans, Lucida Grande, Water Bottle
 
     .line
 

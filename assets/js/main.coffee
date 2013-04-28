@@ -14,6 +14,17 @@ $ ->
     render_events()
     hidePopupEvent()
 
+
+  saveConfig = ->
+    toReturn = {}
+    $('.customize [data-val="true"]').each ->
+      if ($(this).val())
+        toReturn[$(this).attr('data-name')] = $(this).val()
+      else
+        toReturn[$(this).attr('data-name')] = $(this).text()
+
+    $.post "/cal/edit/#{window.location.href.split("/")[5]}", toReturn
+
   #
   # event popup
 
@@ -65,12 +76,13 @@ $ ->
 
   #
   # color pickers
-  # 
+  #
 
   # RGBA Converter
   componentToHex = (c) ->
     hex = c.toString(16)
     (if hex.length is 1 then "0" + hex else hex)
+
   rgbToHex = (r, g, b) ->
     "#" + componentToHex(r) + componentToHex(g) + componentToHex(b)
 
@@ -86,11 +98,10 @@ $ ->
     theColor = rgbToHex(color.r, color.g, color.b)
     $('.selected-color-id').text(theColor)
     colorArray = [color.r, color.g, color.b, 1]
-    console.log(colorArray)
 
-  # 
+  #
   # inject embed code
-  # 
+  #
 
   embed_id = window.location.toString().match(/.*?edit\/(.*)/)[1]
   embed_code = "<script src='http://jenius-radical.jitsu.com/embed/js/#{embed_id}.js'><script>radical('#cal')</script>"
