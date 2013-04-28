@@ -7,20 +7,20 @@
     ul.colors
       li.color-customization
         .header-box
-          .color-selector
-          .selected-color-id(data-name="headerColor", data-val="true") #ed4343
+          .color-selector(style="background-color:"+headerColor)
+          .selected-color-id(data-name="headerColor", data-val="true")=headerColor
         .label Header Color
 
       li.background-color
         .header-box
-          .color-selector
-          .selected-color-id(data-name="backgroundColor", data-val="true") #f9f9f9
+          .color-selector(style="background-color:"+backgroundColor)
+          .selected-color-id(data-name="backgroundColor", data-val="true")=backgroundColor
         .label Background Color
 
       li.highlight-color
         .header-box
-          .color-selector
-          .selected-color-id(data-name="highlightColor", data-val="true") #8380bd
+          .color-selector(style="background-color:"+highlightColor)
+          .selected-color-id(data-name="highlightColor", data-val="true")=highlightColor
         .label Highlight Color
 
     .dashed

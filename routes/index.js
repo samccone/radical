@@ -1,3 +1,5 @@
+var rgbHelper = require("../util/rgb-helpers");
+
 var Schema = null;
 
 exports.set = function(app, schema) {
@@ -155,7 +157,14 @@ function getCSS(req, res){
  * GET home page.
  */
 function homePage(req, res) {
-  res.render('index', { cal_id: req.params.id });
+  Schema.Calendar.all({where: {id: req.params.id}}, function(e, d) {
+    res.render('index', {
+      cal_id: req.params.id,
+      headerColor: rgbHelper.rgbToHex(d[0].headerColor),
+      backgroundColor: rgbHelper.rgbToHex(d[0].backgroundColor),
+      highlightColor: rgbHelper.rgbToHex(d[0].highlightColor)
+    });
+  });
 }
 
 function clientExample(req, res) {
