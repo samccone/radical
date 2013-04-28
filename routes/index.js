@@ -125,7 +125,7 @@ function getCSS(req, res){
   }
 
   getCalInfo(req.params.id, function(err, config){
-    
+
     // compile main.styl and compress
     var css_path = path.join(__dirname, '../assets/css')
     var styl = fs.readFileSync(path.join(css_path, 'client.styl'), 'utf8');
@@ -162,7 +162,8 @@ function homePage(req, res) {
       cal_id: req.params.id,
       headerColor: rgbHelper.rgbToHex(d[0].headerColor),
       backgroundColor: rgbHelper.rgbToHex(d[0].backgroundColor),
-      highlightColor: rgbHelper.rgbToHex(d[0].highlightColor)
+      highlightColor: rgbHelper.rgbToHex(d[0].highlightColor),
+      fonts: d[0].fonts
     });
   });
 }

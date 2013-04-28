@@ -44,7 +44,7 @@ $ ->
     pos_top = pos.top + $(@).outerHeight()
     $('#cal-event').css(left: pos_left, top: pos_top).show()
     $('#cal-event [name="date"]').val($(this).data('stamp'));
-
+    $('#cal-event .current-time').html moment($(this).data('stamp')).format("ddd MMM D")
   $('#cal-event .close').on 'click', hidePopupEvent
 
   $('#cal-event').on "submit", (e) ->
@@ -134,13 +134,16 @@ $ ->
   $('.embed-code-box').text(embed_code)
 
   # Hide picker upon click
+  $('.font-selector').on 'change', ->
+      saveConfig()
+
   $(document).on 'click', (e) ->
     unless ($(e.target)[0].tagName == 'CANVAS' || $(e.target).attr('class') == 'color-selector')
       saveConfig()
       $('.header-box.selected').removeClass("selected")
       $('.color-picker').hide()
 
-  $('.title').zclip({ 
-    path:'/ZeroClipboard.swf', 
+  $('.title').zclip({
+    path:'/ZeroClipboard.swf',
     copy:$('.embed-code-box').text()
     })

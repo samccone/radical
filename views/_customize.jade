@@ -33,9 +33,12 @@
 
     .select-font-label Select Font:
     select.font-selector(data-name="fonts", data-val="true")
-      option(value="Open Sans, Helvetica, Sans-serif") Open Sans, Helvetica, Sans-serif
-      option(value="Bananas, Tiny Apples, Yellow Boat") Bananas, Tiny Apples, Yellow Boat
-      option(value="Comic Sans, Lucida Grande, Water Bottle") Comic Sans, Lucida Grande, Water Bottle
+      - ["Open Sans, Helvetica, Sans-serif", "Bananas, Tiny Apples, Yellow Boat", "Comic Sans, Lucida Grande, Water Bottle"].forEach(function(v){
+        - if (fonts == v)
+          option(value=v, selected)= v
+        - else
+          option(value=v)= v
+      -})
 
     .line
 

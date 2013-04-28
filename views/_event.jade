@@ -8,6 +8,7 @@ form#cal-event(method="post", enctype="multipart/form-data", action="/events/cre
   .body
     .row
       input(type="number", name="date", hidden)
+      .current-time
       select.from(name="from")
         - for(var i = 0; i < 24; ++i)
           - val = i%12+1 + ":" + "00 " + (i < 12 ? "am" : "pm");
