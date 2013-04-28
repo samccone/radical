@@ -138,3 +138,8 @@ $ ->
       saveConfig()
       $('.header-box.selected').removeClass("selected")
       $('.color-picker').hide()
+
+  $('.title').zclip({ 
+    path:'/ZeroClipboard.swf', 
+    copy:$('.embed-code-box').text()
+    })
