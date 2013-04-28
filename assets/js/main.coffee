@@ -115,7 +115,8 @@ $ ->
 
     openedColorPicker = $('.color-picker')
     $('.color-picker').show()
-    colorPicker.color(opened.next().text())
+    colorPicker.hue("rgb("+hexToRgb(opened.next().text()).join(",")+")")
+    colorPicker.render();
 
   colorPicker.on 'change', (color) ->
     opened.css('background', color)
