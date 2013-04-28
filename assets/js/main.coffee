@@ -86,9 +86,11 @@ $ ->
   rgbToHex = (r, g, b) ->
     "#" + componentToHex(r) + componentToHex(g) + componentToHex(b)
 
+  # Initialize color picker
   colorPicker = new picker
   colorPicker.el.appendTo('.colors')
 
+  # Open/ close color picker
   $('.color-selector').on 'click', ->
     openedColorPicker = $('.color-picker')
     openedColorPicker.toggle()
@@ -99,6 +101,19 @@ $ ->
     $('.selected-color-id').text(theColor)
     colorArray = [color.r, color.g, color.b, 1]
 
+  applyColor = (el) ->
+    colorPicker.on 'change', (color) ->
+      theColor = rgbToHex(color.r, color.g, color.b)
+      $(el).css('background', theColor)
+
+      $(el).next().text(theColor)
+      colorArray = [color.r, color.g, color.b, 1]
+      console.log(colorArray)
+
+  $('.color-selector').on 'click', ->
+    applyColor(this)
+    console.log(this)
+  
   #
   # inject embed code
   #
@@ -106,3 +121,8 @@ $ ->
   embed_id = window.location.toString().match(/.*?edit\/(.*)/)[1]
   embed_code = "<script src='http://jenius-radical.jitsu.com/embed/js/#{embed_id}.js'><script>radical('#cal')</script>"
   $('.embed-code-box').text(embed_code)
+
+  # Hide picker upon click
+  $(document).on 'click', (e) ->
+    unless ($(e.target)[0].tagName == 'CANVAS' || $(e.target).attr('class') == 'color-selector')
+      $('.color-picker').hide()
