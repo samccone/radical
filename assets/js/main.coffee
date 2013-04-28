@@ -55,7 +55,8 @@ $ ->
   # event placement
   render_events = ->
     current = cal.renderedMonth()
-    $.get "/events", (data) ->
+
+    $.get "/events/#{window.location.href.split("/")[5]}", (data) ->
       if data[current.year] && data[current.year][current.month]
         for e in data[current.year][current.month]
           render_event(e)

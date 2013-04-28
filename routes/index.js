@@ -3,19 +3,33 @@ var Schema = null;
 exports.set = function(app, schema) {
   Schema = schema;
 
-  app.get('/', homePage);
+  app.get('/', generateCal);
+  app.get("/cal/edit/:id", homePage);
   app.get('/client', clientExample);
   app.get('/events', getEvents);
+  app.get('/events/:id', getAllEventsById);
 
   app.post('/events/create', createEvent);
 
   app.get('/embed/js/:id.js', getJS);
   app.get('/embed/css/:id', getCSS);
 
-} 
+}
+
+function generateCal(req, res) {
+  Schema.Calendar.create(function(e, d) {
+    res.redirect("/cal/edit/"+d._id);
+  });
+};
 
 function getEvents(req, res) {
   Schema.Event.all(function(e, d) {
+    res.json(formatEvents(d));
+  });
+}
+
+function getAllEventsById(req, res) {
+  Schema.Event.all({where: {calendar_id: req.params.id}}, function(e, d) {
     res.json(formatEvents(d));
   });
 }
@@ -118,9 +132,7 @@ function getCSS(req, res){
  * GET home page.
  */
 function homePage(req, res) {
-  Schema.Calendar.create(function(e, d) {
-    res.render('index', { cal_id: d._id });
-  });
+  res.render('index', { cal_id: req.params.id });
 }
 
 function clientExample(req, res) {
