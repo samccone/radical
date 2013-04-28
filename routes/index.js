@@ -108,7 +108,7 @@ function getJS(req, res){
 
   getEventsById(req.params.id, function(err, events){
     events = formatEvents(events);
-    var injector = "window.events = " + JSON.stringify(events) + ";" + uncompressed + "var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = 'http://jenius-radical.jit.su/embed/css/" + req.params.id + ".css'; document.head.appendChild(css)";
+    var injector = "window.events = " + JSON.stringify(events) + ";" + uncompressed + "var css = document.createElement('link'); css.rel = 'stylesheet'; css.href = '/embed/css/" + req.params.id + ".css'; document.head.appendChild(css)";
     res.header('Content-Type', 'application/x-javascript');
     res.send(injector);
   });

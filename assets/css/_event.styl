@@ -113,7 +113,8 @@
       color: #66c8ca
       font-weight: bold
       margin-top: 5px
-      margin-right: 11px
+      margin-right: 18px
+      margin-left: 6px
 
     .middle
       float: left
@@ -122,6 +123,20 @@
         margin: 0
         bold()
         color: #2c2c35
+        fs: .9em
 
       small
         opacity: .5
+        font-size: 70%
+
+    .add-to-calendar
+      size: 33
+      rounded()
+      float: right
+      background: #cdcdcd url('/img/cal.png') center center no-repeat
+      margin-top: 3px
+      transition()
+      cursor: pointer
+
+      &:hover
+        background-color: darken(#cdcdcd, 15%)
