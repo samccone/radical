@@ -78,9 +78,9 @@ $ ->
 
   render_events()
 
-  # 
+  #
   # list toggle
-  # 
+  #
 
   $('.view-selector li').on 'click', ->
     $('.view-selector li').removeClass 'active'
@@ -120,12 +120,10 @@ $ ->
 
       $(el).next().text(theColor)
       colorArray = [color.r, color.g, color.b, 1]
-      console.log(colorArray)
 
   $('.color-selector').on 'click', ->
     applyColor(this)
-    console.log(this)
-  
+
   #
   # inject embed code
   #
@@ -137,4 +135,5 @@ $ ->
   # Hide picker upon click
   $(document).on 'click', (e) ->
     unless ($(e.target)[0].tagName == 'CANVAS' || $(e.target).attr('class') == 'color-selector')
+      saveConfig()
       $('.color-picker').hide()
