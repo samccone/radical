@@ -74,6 +74,14 @@ $ ->
 
   render_events()
 
+  # 
+  # list toggle
+  # 
+
+  $('.view-selector li').on 'click', ->
+    $('.view-selector li').removeClass 'active'
+    $(@).addClass 'active'
+
   #
   # color pickers
   #
