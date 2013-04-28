@@ -38,8 +38,8 @@ function formatEvents(events) {
   events.forEach(function(d) {
     _d = d.date;
     toReturn[_d.getFullYear()] = toReturn[_d.getFullYear()] || {};
-    toReturn[_d.getFullYear()][_d.getDate()] = toReturn[_d.getFullYear()][_d.getDate()] || [];
-    toReturn[_d.getFullYear()][_d.getDate()].push(d);
+    toReturn[_d.getFullYear()][_d.getMonth()] = toReturn[_d.getFullYear()][_d.getMonth()] || [];
+    toReturn[_d.getFullYear()][_d.getMonth()].push(d);
   });
 
   return toReturn;
