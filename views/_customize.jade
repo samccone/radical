@@ -32,8 +32,8 @@
     .dashed
 
     .select-font-label Select Font Stack:
-    select.font-selector(data-name="fonts", data-val="true")
-      - ["Open Sans, Helvetica, Sans-serif", "Bananas, Tiny Apples, Yellow Boat", "Comic Sans, Lucida Grande, Water Bottle"].forEach(function(v){
+    select.font-selector(data-name="fonts", data-val="true", data-target="#cal table", data-cssp="font-family")
+      - ["Open Sans, Helvetica, Sans-serif", "Cursive", 'Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif', 'Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif'].forEach(function(v){
         - if (fonts == v)
           option(value=v, selected)= v
         - else

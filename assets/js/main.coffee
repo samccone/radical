@@ -2,7 +2,9 @@ $ ->
 
   # init calendar
   cal = new Thyme document.getElementById("cal")
-  $('#cal table').css 'background', $("[data-target='#cal table']").css('background-color')
+  $('#cal table').css 'background', $("[data-cssp='background']").css('background')
+  $('#cal table').css 'font-family', $("[data-cssp='font-family']").val()
+
   # month pickers
   $('#cal').on 'click', '.next', ->
     cal.nextMonth()
@@ -135,6 +137,7 @@ $ ->
 
   # Hide picker upon click
   $('.font-selector').on 'change', ->
+      $($(this).data("target")).css($(this).data("cssp"), $(this).val())
       saveConfig()
 
   $(document).on 'click', (e) ->
