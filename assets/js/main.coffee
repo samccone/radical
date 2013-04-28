@@ -2,7 +2,7 @@ $ ->
 
   # init calendar
   cal = new Thyme document.getElementById("cal")
-
+  $('#cal table').css 'background', $("[data-target='#cal table']").css('background-color')
   # month pickers
   $('#cal').on 'click', '.next', ->
     cal.nextMonth()
