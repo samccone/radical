@@ -5,7 +5,7 @@ var Schema = null;
 exports.set = function(app, schema) {
   Schema = schema;
 
-  app.get('/auth', loginPage);
+  app.get('/auth', generateCal);
 
   app.get('/', generateCal);
 
