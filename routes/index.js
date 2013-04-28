@@ -113,7 +113,7 @@ function getCSS(req, res){
     colors: {
       header: new stylus.nodes.RGBA(245,77,78,1),
       background: new stylus.nodes.RGBA(255,255,255,1),
-      hilight: new stylus.nodes.RGBA(10,40,200,1)
+      hilight: new stylus.nodes.RGBA(230,243,255,1)
     },
     fonts: 'Open Sans'
   }

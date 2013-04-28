@@ -48,7 +48,7 @@ window.radical = (div, id) ->
     # display events in popup
     $('#cal-event .body').empty()
     for e in day_events
-      $('#cal-event .body').append("<p>#{e.name}</p>")
+      $('#cal-event .body').append("<div class='evnt'><time>#{e.from}</time><div class='middle'><p>#{e.name}</p><small>#{e.location}</small></div><div class='add-to-calendar'></div></div>")
 
     if day_events.length < 1
       $('#cal-event .body').append("<p class='empty'>no events today : (</p>")
