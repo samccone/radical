@@ -1,25 +1,31 @@
-var rgbHelper = require("../util/rgb-helpers");
-
-var Schema = null;
+var rgbHelper = require("../util/rgb-helpers"),
+    passport = require('passport'),
+    TwitterStrategy = require('passport-twitter').Strategy,
+    FacebookStrategy = require('passport-facebook').Strategy,
+    Schema = null;
 
 exports.set = function(app, schema) {
   Schema = schema;
 
-  app.get('/auth', generateCal);
+  app.get('/auth', loginPage);
+  app.get('/auth/twitter', twitterAuth);
+  app.get('/auth/twitter/callback', twitterCallback);
+  app.get('/auth/facebook', facebookAuth);
+  app.get('/auth/facebook/callback', facebookCallback);
 
   app.get('/', generateCal);
 
   app.get("/cal/edit/:id", homePage);
   app.post("/cal/edit/:id", updateCalStyles);
 
-  app.get('/client', clientExample);
   app.get('/events', getEvents);
   app.get('/events/:id', getAllEventsById);
-
   app.post('/events/create', createEvent);
 
   app.get('/embed/js/:id.js', getJS);
   app.get('/embed/css/:id.css', getCSS);
+
+  app.get('/client', clientExample);
 }
 
 function updateCalStyles(req, res) {
@@ -176,4 +182,56 @@ function clientExample(req, res) {
 
 function loginPage(req, res) {
   res.render('login', { title: 'Express' });
+}
+
+// This seems like it could be dried up a bit
+
+function twitterAuth(req, res){
+
+  var strategy = new TwitterStrategy({
+    consumerKey: TWITTER_CONSUMER_KEY,
+    consumerSecret: TWITTER_CONSUMER_SECRET,
+    callbackURL: "http://localhost:3000/auth/twitter/callback"
+  });
+
+  passport.use(strategy, function(token, tokenSecret, profile, done){
+    // create user in here then call done
+  });
+
+  passport.authenticate('twitter');
+
+}
+
+function twitterCallback(req, res){
+
+  passport.authenticate('twitter', {
+    successRedirect: '/',
+    failureRedirect: '/auth'
+  });
+
+}
+
+function facebookAuth(req, res){
+
+  var strategy = new FacebookStrategy({
+    clientID: FACEBOOK_APP_ID,
+    clientSecret: FACEBOOK_APP_SECRET,
+    callbackURL: "http://localhost:3000/auth/facebook/callback"
+  });
+
+  passport.use(strategy, function(accessToken, refreshToken, profile, done) {
+    // create user in here then call done
+  });
+
+  passport.authenticate('facebook');
+
+}
+
+function facebookCallback(req, res){
+
+  passport.authenticate('facebook', {
+    successRedirect: '/',
+    failureRedirect: '/auth'
+  });
+
 }
