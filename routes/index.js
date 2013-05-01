@@ -1,3 +1,7 @@
+// routes
+var auth = require('./auth')
+
+// deps
 var rgbHelper = require("../util/rgb-helpers"),
     passport = require('passport'),
     TwitterStrategy = require('passport-twitter').Strategy,
@@ -7,11 +11,11 @@ var rgbHelper = require("../util/rgb-helpers"),
 exports.set = function(app, schema) {
   Schema = schema;
 
-  app.get('/auth', loginPage);
-  app.get('/auth/twitter', twitterAuth);
-  app.get('/auth/twitter/callback', twitterCallback);
-  app.get('/auth/facebook', facebookAuth);
-  app.get('/auth/facebook/callback', facebookCallback);
+  app.get('/auth', auth.loginPage);
+  app.get('/auth/twitter', auth.twitterAuth);
+  app.get('/auth/twitter/callback', auth.twitterCallback);
+  app.get('/auth/facebook', auth.facebookAuth);
+  app.get('/auth/facebook/callback', auth.facebookCallback);
 
   app.get('/', generateCal);
 
@@ -178,60 +182,4 @@ function homePage(req, res) {
 
 function clientExample(req, res) {
   res.render('client', { title: 'Express' });
-}
-
-function loginPage(req, res) {
-  res.render('login', { title: 'Express' });
-}
-
-// This seems like it could be dried up a bit
-
-function twitterAuth(req, res){
-
-  var strategy = new TwitterStrategy({
-    consumerKey: TWITTER_CONSUMER_KEY,
-    consumerSecret: TWITTER_CONSUMER_SECRET,
-    callbackURL: "http://localhost:3000/auth/twitter/callback"
-  });
-
-  passport.use(strategy, function(token, tokenSecret, profile, done){
-    // create user in here then call done
-  });
-
-  passport.authenticate('twitter');
-
-}
-
-function twitterCallback(req, res){
-
-  passport.authenticate('twitter', {
-    successRedirect: '/',
-    failureRedirect: '/auth'
-  });
-
-}
-
-function facebookAuth(req, res){
-
-  var strategy = new FacebookStrategy({
-    clientID: FACEBOOK_APP_ID,
-    clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "http://localhost:3000/auth/facebook/callback"
-  });
-
-  passport.use(strategy, function(accessToken, refreshToken, profile, done) {
-    // create user in here then call done
-  });
-
-  passport.authenticate('facebook');
-
-}
-
-function facebookCallback(req, res){
-
-  passport.authenticate('facebook', {
-    successRedirect: '/',
-    failureRedirect: '/auth'
-  });
-
 }
